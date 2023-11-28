@@ -3,7 +3,7 @@ import { Analytics } from '@vercel/analytics/react';
 import logo from './logo.svg';
 import './App.css';
 
-const apiBase = 'http://localhost:3001';
+const apiBase = 'https://lotterydb-express.vercel.app';
 
 export default function App() {
   const [lotteries, setLotteries] = useState([]);
@@ -25,12 +25,10 @@ export default function App() {
     try {
       const res = await fetch(`${apiBase}/lotteries`);
       const data = await res.json();
-      if (data) {
-        setLotteries(data);
-        setSelectedLottery(data[0]);
-      }
+      setLotteries(data);
+      setSelectedLottery(data[0]);
     } catch (error) {
-      console.log(error);
+      console.log('failed to fetch lotteries from database:', error);
     }
   }
 
@@ -38,12 +36,10 @@ export default function App() {
     try {
       const res = await fetch(`${apiBase}/users`);
       const data = await res.json();
-      if (data) {
-        setUsers(data);
-        setSelectedUser(data[0]);
-      }
+      setUsers(data);
+      setSelectedUser(data[0]);
     } catch (error) {
-      console.log(error);
+      console.log('failed to fetch users from database:', error);
     }
   }
 
@@ -52,9 +48,7 @@ export default function App() {
       if (!selectedLottery) return;
       const res = await fetch(`${apiBase}/users/lottery/${selectedLottery.lotteryId}`);
       const data = await res.json();
-      if (data) {
-        setUsersInLottery(data);
-      }
+      setUsersInLottery(data);
     } catch (error) {
       console.log(error);
     }
@@ -69,10 +63,8 @@ export default function App() {
       if (!selectedUser) return;
       const res = await fetch(`${apiBase}/lotteries/${selectedUser.userId}`);
       const data = await res.json();
-      if (data) {
-        setLotteriesByUser(data);
-      }
-    } catch (error) {
+      setLotteriesByUser(data);
+     } catch (error) {
       console.log(error);
     }
   }, [selectedUser]);
@@ -129,8 +121,7 @@ export default function App() {
       IsUserInLottery();
       GetLotteriesByUser();
       GetUsersInLottery();
-      console.log('reset');
-    } catch (error) {
+     } catch (error) {
       console.log(error);
     }
   }
@@ -148,7 +139,7 @@ export default function App() {
               </option>
           })}
         </select>
-          {console.log(selectedLottery)}
+
         {selectedLottery ? `${isLotteryDrawn ? 'Winners of' : 'Users in'} 
           ${selectedLottery.lotteryName}: ${usersInLottery.map(user => user.name).join(', ')}`
         : 'No lottery selected'}
@@ -176,8 +167,7 @@ export default function App() {
           {isLotteryDrawn ? 'Lottery is over' 
             : isUserInLottery ? 'Withdraw from lotttery' : 'Register for lottery'}
         </button>
-        {console.log(selectedLottery)
-}
+        
         <img src={logo} className="App-logo" alt="logo" />
       </header>
     </div>
