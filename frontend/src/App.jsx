@@ -1,4 +1,5 @@
 import { useEffect, useCallback, useState } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import logo from './logo.svg';
 import './App.css';
 
@@ -136,6 +137,7 @@ export default function App() {
 
   return (
     <div className="App">
+      <Analytics/>
       <header className="App-header">
         <button onClick={reset}>Reset</button>
         Select Lottery 
