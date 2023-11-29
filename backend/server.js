@@ -163,14 +163,17 @@ app.post('/reset', async (req, res) => {
         await User.deleteMany({});
         await LotteryEntry.deleteMany({});
         await Lottery.create([
-            { lotteryId: '1', lotteryName: 'Event 1', ticketsAvailable: 1 },
-            { lotteryId: '2', lotteryName: 'Event 2', ticketsAvailable: 2 },
-            { lotteryId: '3', lotteryName: 'Event 3', ticketsAvailable: 3 },
+            { lotteryId: '1', lotteryName: 'Hamilton', ticketsAvailable: 1 },
+            { lotteryId: '2', lotteryName: 'West Side Story', ticketsAvailable: 2 },
+            { lotteryId: '3', lotteryName: 'Wicked', ticketsAvailable: 3 },
         ]);
         await User.create([
-            { userId: '1', name: 'User 1' },
-            { userId: '2', name: 'User 2' },
-            { userId: '3', name: 'User 3' }
+            { userId: '1', name: 'Ross' },
+            { userId: '2', name: 'Rachel' },
+            { userId: '3', name: 'Pheobe' },
+            { userId: '4', name: 'Monica' },
+            { userId: '5', name: 'Joey' },
+            { userId: '6', name: 'Chandler' },
         ]);
         await LotteryEntry.create([
             { lotteryId: '1', userId: '1' },
